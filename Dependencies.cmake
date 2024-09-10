@@ -9,7 +9,7 @@ function(TBD_setup_dependencies)
   # already been provided to us by a parent project
 
   if(NOT TARGET fmtlib::fmtlib)
-    cpmaddpackage("gh:fmtlib/fmt#9.1.0")
+    cpmaddpackage("gh:fmtlib/fmt#11.0.2")
   endif()
 
   if(NOT TARGET spdlog::spdlog)
