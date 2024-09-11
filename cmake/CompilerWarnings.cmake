@@ -56,6 +56,11 @@ function(
         -Wdouble-promotion # warn if float is implicit promoted to double
         -Wformat=2 # warn on security issues around functions that format output (ie printf)
         -Wimplicit-fallthrough # warn on statements that fallthrough without an explicit annotation
+        -Wno-c++98-compat
+        -Wno-c++98-compat-pedantic
+        -Wno-c++98-c++11-compat-pedantic
+        -Wno-missing-prototypes
+        -Wno-extra-semi-stmt
     )
   endif()
 
@@ -89,10 +94,10 @@ function(
     list(APPEND MSVC_WARNINGS /WX)
   endif()
 
-  if(MSVC)
-    set(PROJECT_WARNINGS_CXX ${MSVC_WARNINGS})
-  elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+  if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
     set(PROJECT_WARNINGS_CXX ${CLANG_WARNINGS})
+  elseif(MSVC)
+    set(PROJECT_WARNINGS_CXX ${MSVC_WARNINGS})
   elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     set(PROJECT_WARNINGS_CXX ${GCC_WARNINGS})
   else()

@@ -3,7 +3,7 @@ include(GenerateExportHeader)
 
 add_library(sample_library sample_library.cpp)
 
-
+set(CMAKE_CXX_STANDARD 23)
 
 add_library(TBD::sample_library ALIAS sample_library)
 

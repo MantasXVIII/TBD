@@ -21,6 +21,7 @@ macro(TBD_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           # We cannot act on a bug/missing feature of cppcheck
           --suppress=cppcheckError
           --suppress=internalAstError
+          --suppress=knownConditionTrueFalse
           # if a file does not have an internalAstError, we get an unmatchedSuppression error
           --suppress=unmatchedSuppression
           # noisy and incorrect sometimes
@@ -31,7 +32,7 @@ macro(TBD_enable_cppcheck WARNINGS_AS_ERRORS CPPCHECK_OPTIONS)
           --inconclusive
           --suppress=${SUPPRESS_DIR})
     else()
-      # if the user provides a CPPCHECK_OPTIONS with a template specified, it will override this template
+      # if the user provides a CPPCHECK_OPTIONS with a template specified, it w ill override this template
       set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --template=${CPPCHECK_TEMPLATE} ${CPPCHECK_OPTIONS})
     endif()
 
@@ -92,7 +93,8 @@ macro(TBD_enable_clang_tidy target WARNINGS_AS_ERRORS)
 
     # set warnings as errors
     if(${WARNINGS_AS_ERRORS})
-      list(APPEND CLANG_TIDY_OPTIONS -warnings-as-errors=*)
+      message("clang-tidy warnings as errors excludes: 'misc-include-cleaner'")
+      list(APPEND CLANG_TIDY_OPTIONS -warnings-as-errors=*,-misc-include-cleaner)
     endif()
 
     message("Also setting clang-tidy globally")

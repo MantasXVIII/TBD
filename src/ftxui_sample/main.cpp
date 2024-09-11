@@ -3,6 +3,7 @@
 #include <iostream>
 #include <optional>
 
+#include <string>
 #include <random>
 
 #include <CLI/CLI.hpp>
@@ -256,6 +257,8 @@ void game_iteration_canvas()
       break;
     case 2:
       small_bm_pixel.B += 11;// NOLINT Magic Number
+      break;
+      default:
       break;
     }
 
